@@ -5,6 +5,7 @@
 \usepackage{framed}
 \usepackage{url}
 \usepackage{graphicx}
+%\usepackage{showlabels}
 
 \titleformat{\section}[runin]
 {\normalfont\bfseries}
@@ -17,7 +18,7 @@
 
 \title{\LaTeX\ Workshop}
 \author{Don Brower\thanks{email: \texttt{dbrower$@$nd.edu}}}
-\date{Oct. 2013}
+\date{2014-5-14}
 \maketitle
 
 \section{\TeX\ and \LaTeX}
@@ -28,9 +29,7 @@ A LaTeX document starts as a file which has special markup characters (similar t
 which is then processed by the LaTeX program all at once to produce a PDF document.
 
 Part of \LaTeX\ is the program \TeX, which came first in 1978.
-\TeX provides the foundational typesetting commands, and is pronounced
-as ``tech'', since the uppercase X is really representing the greek letter chi, $\chi$,
-and has the sound of a hard ``ch''.
+\TeX\ (which sounds like tech, since the final X is the uppercase greek letter chi) provides the foundational typesetting commands.
 \LaTeX\ is an add-on developed in 1986, and it makes using \TeX\ easier---so much so that it
 is now the standard everyone uses, although one may find references to old-style \TeX\ commands occasionally.
 
@@ -44,7 +43,7 @@ These will be annoying, so I may use TeX and LaTeX to refer to the two programs.
 
 \section{Where is \TeX?}
 
-Tex is not a single program.
+TeX is not a single program.
 It is a group of programs, and one usually installs it by installing a \textit{\TeX\ distribution}.
 The distribution to use depends on the operating system on your computer.
 Some common distributions are in the following table.
@@ -81,14 +80,17 @@ Type the following into your editor, save it as the file \textit{hello.tex} and 
 \documentclass{article}
 
 \begin{document}
-Hello
+Hello World!
 \end{document}
 \end{verbatim}
 \end{framed}
 
-You should see a document with the word ``Hello'' on it.
+You should see a document with the phrase ``Hello World!'' on it.
 The words which begin with a backslash, `\textbackslash', tell LaTeX that the word is a formatting command.
-The first one, \verb=\documentclass=, specifies which layout we want to use.\footnote{Other layouts are XXX}
+The first one, \verb=\documentclass=, specifies which layout we want to use.\footnote{Other layouts in addition
+    to \textit{article} are \textit{report}, \textit{letter}, \textit{book}, and \textit{slides}.
+    Fancier types are the AMS article classes \textit{amsart}, and the slide class \textit{beamer}.
+}
 Then the pair of \verb=\begin{document}= and \verb=\end{document}= wrap the words we want to be typeset.
 
 The text before the \verb=\begin{document}= is called the \emph{preamble}.
@@ -223,12 +225,11 @@ Produces output like the following:
 
 \section{Quotes and Comments}
 
-If you use 
 Don't use the usual quote character \verb="= in your files.
 Prefer to use two back-ticks \verb=``= and two apostrophes like so:
 \verb=``Quote''= to get the output ``Quote''.
 
-There are three kinds of dashes: the hyphen, -; the en-dash, --; and the em-dash, ---.
+There are three kinds of dashes: the hyphen, - ; the en-dash, -- ; and the em-dash, ---.
 The hyphen is used when breaking words between lines and when combining watcha-may-call-its.
 The en dash, made using \verb=--=, is used to indicate number ranges, e.g. 5--10 business days.
 The em dash, made with \verb=---=, is used to indicate changes in thought---or, whatever the grammar books tell us.
@@ -375,12 +376,12 @@ More complex formula can use \emph{display style}:
 \]\end{verbatim}
 \end{framed}
 
-Math formulae use carets, \^, for superscripts and underscores, \_, for subscripts.
+Math formulae use carets, \^\ , for superscripts and underscores, \_\ , for subscripts.
 Other math notation use commands, such as \verb=\frac{..}{..}= for fractions, and
 \verb=\sum= for the summation symbol.
 You can get Greek letters using \verb=$\alpha, \beta, \gamma, \ldots$=, to give $\alpha, \beta, \gamma,\ldots$
 
-There are too many math commands here.
+There are, unfortunately, too many math commands to discuss each here.
 If you have especially demanding math needs, the \verb=amsmath= has many specialized environments for mathematics.
 
 LaTeX makes a distinction between commands entered in \emph{math mode}, as opposed to \emph{text mode}.
@@ -408,17 +409,92 @@ For example,
 \end{framed}
 will center the picture \emph{hello-yes-this-is-dog} in its own text block.
 
-\section{Tables}
-
-There are two aspects to tables:
-first,~one needs to layout the rows and columns of data.
-Second, one often needs to have the table to float to a convenient portion of the page, say the bottom or the top.
-The \verb=\tabular= environment handles the first concern, and the \verb=\table= environment handles the second.
-
+%\section{Tables}
+%
+%There are two aspects to tables:
+%first,~one needs to layout the rows and columns of data.
+%Second, one often needs to have the table to float to a convenient portion of the page, say the bottom or the top.
+%The \verb=\tabular= environment handles the first concern, and the \verb=\table= environment handles the second.
+%
 
 \section{Sections, Table of Contents}
 
+%% TODO:
+
+\section{References}
+
+LaTeX makes it easy to generate cross-references between sections.
+Most sectioning commands and figure commands can be labeled using a \verb=\label=
+directive, which assigns the command an internal name.
+To refer to the section/figure/table one then uses a \verb=\ref= command with the same internal name.
+For example, the following code will tag the section ``Further Reading'' with the label
+\verb=sec:further-reading=.
+\begin{framed}\begin{verbatim}
+\section{Further Reading}
+\label{sec:further-reading}
+\end{verbatim}
+\end{framed}
+To refrer to the section we then use the \verb=\ref= command as follows:
+\begin{framed}\begin{verbatim}
+See section~\ref{sec:further-reading}.
+\end{verbatim}
+\end{framed}
+The tilde, \verb=~=, inserts a non-breaking space to keep the section number from being separated from the word ``section''.
+
+I usually use prefixes, like \texttt{sec:}, \texttt{eq:}, and \texttt{tbl:}, to remind me whether the label is referring to a section, subsection, table, figure,
+or equation.
+But they are not required by latex.
+
+The \texttt{showlabels} package will display all your labels in the margin next to the item being tagged.
+It is very handy for writing your initial drafts.
+
 \section{Bibliography}
+
+The BibTeX program will generate bibliographies for LaTeX documents.
+BibTeX is a separate program which will use an auxiliary file that LaTeX generates to figure out which entries in
+your master ``database'' to include in each document's bibliography.
+You can manage the BibTeX database either with a program or by hand.
+Each citation has an identifying key, which you may assign or change yourself.
+To include a citation into a paper use the command \verb=\cite{}=.
+
+For example, if the BibTeX database contains the following entry,
+\begin{framed}\begin{verbatim}
+@article {black73,
+    title = {The pricing of options and corporate liabilities},
+    author = {Black, Fischer and Scholes, Myron},
+    journal = {The Journal of Political Economy},
+    volume = {81},
+    issue = {3},
+    year = {1973},
+    pages = {637--654},
+}\end{verbatim}
+\end{framed}
+which has the key \verb=black73=.
+To cite this source in a document write
+\begin{framed}\begin{verbatim}
+That option was not worth it \cite{black73}.
+\end{verbatim}
+\end{framed}
+which will give
+\begin{framed}
+    That option was not worth it \cite{black73}.
+\end{framed}
+
+To insert the bibliography into your document, put the following code where you
+would like it to appear.
+\begin{framed}\begin{verbatim}
+\bibliographystyle{plain}
+\bibliography{research}
+\end{verbatim}
+\end{framed}
+
+When using citations, up to four passes may be needed to convert your file to a PDF.
+\begin{enumerate}
+    \item A first pass with LaTeX to generate an aux file listing the citations used.
+    \item A second pass with BibTeX to generate the bibliography.
+    \item A third pass with LaTeX to re-adjust the locations of the sections, tables, etc.
+    \item A fourth pass with LaTeX to insert the correct cross-references and table of contents.
+\end{enumerate}
 
 \section{Further Reading}
 \label{sec:further-reading}
@@ -435,6 +511,35 @@ The \verb=\tabular= environment handles the first concern, and the \verb=\table=
         It covers most common areas of LaTeX in great detail, and offers good extension packages to
         use for special formatting cases.
 
+    \item J\"urgen Fenn, ``Managing Citations and Your Bibliography with BibTeX'', \url{http://www.tug.org/pracjourn/2006-4/fenn/fenn.pdf}
+
+        J\"urgen Fenn article answers many basic questions about using BibTeX and pointers to handling special situations, such as proper names in a title.
+        It only shows its age when it discusses the future of BibTeX (section 5.6), where it turns out that BibTeX standard has been accepted by
+        libraries and other archives as an export format for citations (but not the ND Library).
+        In part the ubiquity of BibTeX is due to the stability of its citation data format.
+
+    \item Michael Downes, ``Short Math Guide for \LaTeX'', \url{ftp://ftp.ams.org/ams/doc/amsmath/short-math-guide.pdf}
+
+        This short (17 page) paper lists the extra math commands, symbols, and fonts provided by the American Mathematical Society LaTeX packages
+        (\textit{amssymb} and \textit{amsmath}).
+
+    \item Leslie Lamport, ``LATEX: a document preparation system''
+
+        The book by the originator of LaTeX on how to use the system.
+
 \end{itemize}
+
+\section{LaTeX at Notre Dame}
+
+In addition to the resources on the internet, Notre Dame has a mailing list for tex help,
+\verb=nd-latex-users@listserv.nd.edu=.
+I am on this list, as are a few people who are extremely knowledgeable on LaTeX.
+Most questions on the list are about the Notre Dame thesis style file, but any question is welcome.
+Please use the list as a resource if you run into problems.
+
+
+\bibliographystyle{plain}
+%\bibliographystyle{alpha}
+\bibliography{research}
 
 \end{document}
