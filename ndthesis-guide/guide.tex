@@ -44,24 +44,20 @@ Unziping the file creates a directory \textit{StandDistribution} with five files
 
 \begin{verbatim}
 my-thesis/
-    chapter
-    Makefile
-    don-thesis.bib
-    dwip
-        dwip-forking.tex
-        dwip.tex
-        modeltheory.bib
-    hyperimaginaries
-        hyper-only.tex
-        hyper.tex
+    references.bib
+    background
+        only.tex
+        background.tex
+    stuff
+        only.tex
+        stuff.tex
     introduction.tex
     nddiss2e.bst
     nddiss2e.cls
     preamble.tex
-    seq-amalg
-        modeltheory.bib
-        seq-only.tex
-        seq.tex
+    results
+        only.tex
+        results.tex
     thesis.tex
 \end{verbatim}
 
@@ -74,25 +70,23 @@ I set up the preamble, title, abstract, table of contents, and so on.
 Then I include each chapter with code similar to the following
 
 \begin{verbatim}
-\chapter{DWIP}
-\label{ch:dwip}
-\input{dwip/dwip}
+\chapter{BACKGROUND AND PRIOR WORK}
+\label{ch:background}
+\input{background/background}
 \end{verbatim}
 
 (N.b. Chapter titles in the thesis should be uppercased.)
 Inside each chapter there are two files.
-The main content is in one file, e.g. \textit{dwip.tex}.
+The main content is in one file, e.g. \textit{background.tex}.
 I have a second file which wraps the content file so it can be processed by itself.
 
 \begin{verbatim}
 \documentclass[12pt]{amsart}
 \input{../preamble}
 \begin{document}
-\title{DWIP in Simple Theories}
+\title{Background and prior work}
 \maketitle
-\input{dwip}
-\bibliographystyle{plain}
-\bibliography{modeltheory}
+\input{background}
 \end{document}
 \end{verbatim}
 
