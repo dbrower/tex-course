@@ -1,0 +1,101 @@
+\documentclass{article}
+
+\usepackage{booktabs}
+\usepackage{titlesec}
+\usepackage{framed}
+\usepackage{url}
+\usepackage{graphicx}
+%\usepackage{showlabels}
+
+\titleformat{\section}[runin]
+{\normalfont\bfseries}
+{\S\thesection.}{.5em}{}[.]
+\titlespacing{\section}
+{\parindent}{1.5ex plus .1ex minus .2ex}{10pt}
+
+
+\begin{document}
+
+\title{Notre Dame \LaTeX\ Thesis Template Guide}
+% \author{Don Brower\thanks{email: \texttt{dbrower$@$nd.edu}}}
+\date{October 2014}
+\maketitle
+
+\begin{itemize}
+\item The files are on the graduate school's website at \url{http://graduateschool.nd.edu/resources-for-current-students/dt/dt-resources/}.
+In the middle of the page is a view of a Box folder. Choose \textit{LaTeX (nddiss2e)}, and then download the file \textit{StandDistribution.zip}.
+Unziping the file creates a directory \textit{StandDistribution} with five files inside:
+
+\begin{itemize}
+	\item nddiss2e.bst
+	\item nddiss2e.cls
+	\item nddiss2e.pdf
+	\item nddiss2enoarticletitles.bst
+	\item template.tex
+\end{itemize}
+
+\item The file \textit{nddiss2e.pdf} explains the options of the thesis class, e.g. how to make draft versions, final versions, the options for the title page, etc.
+
+\item One difficulty of editing a large document is the time spent reprocessing each chapter after changes.
+    If it makes sense for your work, I would recommend putting each chapter in its own file, or even its own directory.
+    This is how I solved the problem.
+    You may find a better solution, or perhaps your editor supports processing files independently.
+    For example:
+
+\begin{verbatim}
+my-thesis/
+    chapter
+    Makefile
+    don-thesis.bib
+    dwip
+        dwip-forking.tex
+        dwip.tex
+        modeltheory.bib
+    hyperimaginaries
+        hyper-only.tex
+        hyper.tex
+    introduction.tex
+    nddiss2e.bst
+    nddiss2e.cls
+    preamble.tex
+    seq-amalg
+        modeltheory.bib
+        seq-only.tex
+        seq.tex
+    thesis.tex
+\end{verbatim}
+
+The file \textit{preamble.tex} contains any shared definitions which I intend to use across the chapters.
+(e.g. I defined the symbol \texttt{\\sss} which are three large stars so I can see places that I left incomplete.
+\verb=\newcommand{\sss}{\ensuremath{\star\star\star}}=)
+
+The main thesis is defined in the \textit{thesis.tex} file.
+I set up the preamble, title, abstract, table of contents, and so on.
+Then I include each chapter with code similar to the following
+
+\begin{verbatim}
+\chapter{DWIP}
+\label{ch:dwip}
+\input{dwip/dwip}
+\end{verbatim}
+
+(N.b. Chapter titles in the thesis should be uppercased.)
+Inside each chapter there are two files.
+The main content is in one file, e.g. \textit{dwip.tex}.
+I have a second file which wraps the content file so it can be processed by itself.
+
+\begin{verbatim}
+\documentclass[12pt]{amsart}
+\input{../preamble}
+\begin{document}
+\title{DWIP in Simple Theories}
+\maketitle
+\input{dwip}
+\bibliographystyle{plain}
+\bibliography{modeltheory}
+\end{document}
+\end{verbatim}
+
+\end{itemize}
+
+\end{document}
