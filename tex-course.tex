@@ -3,7 +3,7 @@
 \usepackage{booktabs}
 \usepackage{titlesec}
 \usepackage{framed}
-\usepackage{url}
+\usepackage{hyperref}
 \usepackage{graphicx}
 %\usepackage{showlabels}
 
@@ -18,19 +18,19 @@
 
 \title{\LaTeX\ Workshop}
 \author{Don Brower\thanks{email: \texttt{dbrower$@$nd.edu}}}
-\date{2014-5-14}
+\date{2016-5-11}
 \maketitle
 
 \section{\TeX\ and \LaTeX}
 
 \LaTeX\ is a typesetting system which makes it easy to create typographically sophisticated documents.
 It also has a challenging, unintuitive interface.
-A LaTeX document starts as a file which has special markup characters (similar to HTML or Wiki Formatting),
-which is then processed by the LaTeX program all at once to produce a PDF document.
+A \LaTeX\ document starts as a file which has special markup characters (similar to HTML or Wiki Formatting),
+which is then processed by the \LaTeX\ program to produce a PDF document.
 
 Part of \LaTeX\ is the program \TeX, which came first in 1978.
-\TeX\ (which sounds like tech, since the final X is the uppercase greek letter chi) provides the foundational typesetting commands.
-\LaTeX\ is an add-on developed in 1986, and it makes using \TeX\ easier---so much so that it
+\TeX\ (which sounds like \textit{tech}, since the final \textit{X} is the greek letter chi) provides the foundational typesetting commands.
+\LaTeX\ is an add-on developed in 1986 to make using \TeX\ easier---so much so that \LaTeX\ 
 is now the standard everyone uses, although one may find references to old-style \TeX\ commands occasionally.
 
 This course tries to provide a hands-on guide to using \LaTeX.
@@ -39,7 +39,7 @@ More comprehensive guides and manuals are presented at the end, in \S\ref{sec:fu
 
 To show off the abilities of this new typesetting software, Donald Knuth, the creator of \TeX, made
 a fancy arrangement of the letters: \TeX.
-These will be annoying, so I may use TeX and LaTeX to refer to the two programs.
+I find these annoying, so I will use TeX and LaTeX to refer to the two programs.
 
 \section{Where is \TeX?}
 
@@ -63,13 +63,13 @@ Some common distributions are in the following table.
 In addition to a distribution, you will also need a \textit{text editor}.
 A text editor is a program which lets you type and edit text documents.
 The most important criteria is that the program can save plain text documents.
-Microsoft Word could work, but you need to specify to save it as ``Plain Text (.txt)''.
+Microsoft Word could work, but you need to specifically save yours files as ``Plain Text (.txt)''.
 Notepad is another text editor.
-TextEdit on Macs is almost a text editor, but one needs to change the ``Format'' option in the preferences to ``Plain Text''.
+TextEdit on Macs is almost a text editor, but one first needs to change the ``Format'' option in the preferences to ``Plain Text''.
 
-Fortunately, most distributions include speciality editors which are designed to work with LaTeX.
+Most distributions include speciality editors which are designed to work with LaTeX.
 Two such are \TeX shop and \TeX studio.
-This guide will assume you are using \TeX studio.
+This guide will assume you are using \TeX Works.
 
 
 \section{Hello World}
@@ -86,13 +86,9 @@ Hello World!
 \end{framed}
 
 You should see a document with the phrase ``Hello World!'' on it.
-The words which begin with a backslash, `\textbackslash', tell LaTeX that the word is a formatting command.
-The first one, \verb=\documentclass=, specifies which layout we want to use.\footnote{Other layouts in addition
-    to \textit{article} are \textit{report}, \textit{letter}, \textit{book}, and \textit{slides}.
-    Fancier types are the AMS article classes \textit{amsart}, and the slide class \textit{beamer}.
-}
+The backslash, `\textbackslash', tells LaTeX that the following word is a formatting command.
+The first one, \verb=\documentclass=, specifies which layout we want to use.
 Then the pair of \verb=\begin{document}= and \verb=\end{document}= wrap the words we want to be typeset.
-
 The text before the \verb=\begin{document}= is called the \emph{preamble}.
 
 % makes a bunch of files: hello.log, hello.aux, hello.dvi, hello.blg, hello.bbl, hello.pdf, hello.synctex.gz
@@ -103,7 +99,7 @@ They are
     \% \$ \{ \} \_ \# \& \textasciitilde\ \textgreater\ \textless\
 \end{center}
 These symbols all have special meanings in a LaTeX file.
-If you should need one of these symbols in your document, each character has a command which represents it in the document:
+If you should need one of these symbols in your document, each character has a corresponding command to represent it:
 \begin{center}
     \begin{tabular}[]{ll}
         \toprule
@@ -144,12 +140,11 @@ They \textit{can be \textbf{nested}}.
 \end{framed}
 \end{center}
 
-These commands start with a backslash, followed by an opening brace, '\{',
-the text to format, and then a closing brace, '\}'.
+These commands start with a backslash, followed by an opening brace, '\{', the text to format, and then a closing brace, '\}'.
 The opening and closing braces need to be matched.
 If there is more of one than the other, LaTeX will complain.
 
-Try playing around with the following character styles:
+Try using the following character styles:
 
 \begin{center}
     \begin{tabular}[]{ll}
@@ -175,10 +170,10 @@ Medium Weight   & \verb=\textmd{...}= \\
 \section{Spaces, Justification, and Hyphenations}
 
 Most of the time you will use normal spaces in your document.
-LaTeX will automatically format your lines, and form them into paragraphs.
+LaTeX will automatically format your lines, and group them into paragraphs.
 It will even hyphenate words to improve the line breaks!
 
-LaTeX will group lines which are next to each other into the same paragraph.
+LaTeX will put lines which are next to each other into the same paragraph.
 To start a new paragraph, enter a blank line.
 
 \begin{framed}
@@ -208,8 +203,13 @@ Produces output like the following:
     this line.
 \end{framed}
 
+The paragraphs are adjusted to fully justify on the page.
+LaTeX will break lines in places that gives the best justification, and will even hyphenate words.
+Multiple spaces will be collapsed to a single space.
+Comments:
+
 \begin{itemize}
-    \item Tell LaTeX to not split a line at a given space by replacing the space with a tilde, '\textasciitilde'.
+    \item Keep LaTeX from spliting a line at a given space by replacing the space with a tilde, '\textasciitilde'.
         For example, \verb=Mrs.~White= will not insert a line break between \verb=Mrs.= and \verb=White=.\footnote{See \url{http://tex.stackexchange.com/questions/15547/when-should-i-use-non-breaking-space} for more discussion.}
 
     \item You can force a line break by ending an input line with two backslashes, `\textbackslash\textbackslash'.
@@ -226,13 +226,13 @@ Produces output like the following:
 \section{Quotes and Comments}
 
 Don't use the usual quote character \verb="= in your files.
-Prefer to use two back-ticks \verb=``= and two apostrophes like so:
+Instead use two back-ticks \verb=``= and two apostrophes like so:
 \verb=``Quote''= to get the output ``Quote''.
 
 There are three kinds of dashes: the hyphen, - ; the en-dash, -- ; and the em-dash, ---.
 The hyphen is used when breaking words between lines and when combining watcha-may-call-its.
 The en dash, made using \verb=--=, is used to indicate number ranges, e.g. 5--10 business days.
-The em dash, made with \verb=---=, is used to indicate changes in thought---or, whatever the grammar books tell us.
+The em dash, made with \verb=---=, is used to indicate changes in thought---or, whatever.
 
 % discuss comments
 % TODO: insert cat picture here?
@@ -358,9 +358,9 @@ The other kinds of lists are similar.
 
 The ability to typeset math formualae is the main reason many people
 choose to use LaTeX at first.
-A formula may be either typeset \emph{inline}, such
+A formula may be typeset \emph{inline}, such
 as $x$ is a real variable, and $f(z) = e^z$ is an analytic function.
-More complex formula can use \emph{display style}:
+More complex formula can be typeset in \emph{display style}:
 \[
     H(a, r) = \sum_{n = 0}^\infty ar^n = \frac{a}{1-r}.
 \]
@@ -368,9 +368,9 @@ Inline formulae are surrounded by dollar signs, \$, and display formulae
 use \verb=\[= and \verb=\]=.
 \begin{framed}
 \begin{verbatim}
-A formula may be either typeset \emph{inline}, such
+A formula may be typeset \emph{inline}, such
 as $x$ is a real variable, and $f(z) = e^z$ is an analytic function.
-More complex formula can use \emph{display style}:
+More complex formula can be typeset in \emph{display style}:
 \[
     H(a, r) = \sum_{n = 0}^\infty ar^n = \frac{a}{1-r}.
 \]\end{verbatim}
@@ -382,7 +382,7 @@ Other math notation use commands, such as \verb=\frac{..}{..}= for fractions, an
 You can get Greek letters using \verb=$\alpha, \beta, \gamma, \ldots$=, to give $\alpha, \beta, \gamma,\ldots$
 
 There are, unfortunately, too many math commands to discuss each here.
-If you have especially demanding math needs, the \verb=amsmath= has many specialized environments for mathematics.
+If you have especially demanding math needs, the \verb=amsmath= package has many specialized environments for mathematics.
 
 LaTeX makes a distinction between commands entered in \emph{math mode}, as opposed to \emph{text mode}.
 Some commands only work in one or the other.
@@ -408,20 +408,106 @@ For example,
 \end{center}\end{verbatim}
 \end{framed}
 will center the picture \emph{hello-yes-this-is-dog} in its own text block.
+The \texttt{scale} option can be used to fine-tune the size of the image.
 
-%\section{Tables}
-%
-%There are two aspects to tables:
-%first,~one needs to layout the rows and columns of data.
-%Second, one often needs to have the table to float to a convenient portion of the page, say the bottom or the top.
-%The \verb=\tabular= environment handles the first concern, and the \verb=\table= environment handles the second.
-%
+\section{Tables}
 
-\section{Sections, Table of Contents}
+There are two main table commands:
+\begin{itemize}
+\item There is the \verb=tabular= command to arrange figures into rows and columns.
+\item There is the \verb=table= command to produce a floating figure at a convenient piece of the page, say the bottom or the top.
+\end{itemize}
+Usually the two are used together, with a \verb=\table= command and a \verb=\tabular= inside of it.
 
-%% TODO:
+The \verb=tabular= environment takes a list of characters giving the justification for each column in the table.
+After that, each row of the table is listed. Each row ends with a double backslash (\verb=\\=).
+The columns in a row are separated with ampersands (\verb=&=).
+For example, the table at the beginning of this document looks like this:
+
+\begin{framed}
+\begin{verbatim}
+\begin{center}
+\begin{tabular}{ll}
+    \toprule
+    Operating System & Distribution \\
+    \midrule
+    Windows & MiKTeX \\
+    Mac & MacTeX \\
+    Linux & TeX Live \\
+    \bottomrule
+\end{tabular}
+\end{center}
+\end{verbatim}
+\end{framed}
+
+The \verb={ll}= says this table has two columns, and both are left-justified.
+The \verb=\toprule=, \verb=\midrule=, \verb=\bottomrule= commands are from the booktabs package.
+They draw the lines in the table.
+You can leave them out, or if you want to use them add the line \verb=\usepackage{booktabs}= after the \verb=\documentclass= at the beginning of the file.
+
+In the above example, the \verb=tabular= environment has an enclosing \verb=center= environment to center it on the page.
+Otherwise, the table will appear in the output file between the same text it appears between in the source file.
+The \verb=table= environment lets the table float out of line to the top or bottom of a page.
+It provides an area to give a \verb=tabular= environments as well as a caption and a internal reference number (see \S\ref{sec:references}).
+
+It is important to say that it is not necessary to use the \verb=table= environment.
+The actual table formatting is done with \verb=tabular=, and the \verb=table= only serves to produce a floating figure.
+
+Example of \verb=table= usage:
+
+\begin{framed}
+\begin{verbatim}
+\begin{table}[t]
+  \centering
+  \begin{tabular}
+    ... tabular from before ...
+  \end{tabular}
+  \caption{This table's caption is very modest}
+  \label{tbl:modest}
+\end{table}
+\end{verbatim}
+\end{framed}
+
+The \verb=[t]= after the environment says we prefer this table to float to the top of a page.
+The \verb=tabular= environment is as before.
+A caption is added using \verb=\caption= and the \verb=\label= gives an internal name to this table
+for cross-reference purposes (see \S\ref{sec:references}).
+
+\section{Sections and Table of Contents}
+
+Sections are started by using the \verb=\section{}= command.
+The text in the braces is the section title.
+Everything following a section command (until the next section command) is considered part of that section.
+There are also commands for \verb=\subsection= and \verb=\subsubsection=.
+
+The exact sectioning commands available depends on the \verb=\documentclass= your document is using.
+For example, the book type includes \verb=\chapter= commands.
+
+A table of contents is inserted using the command \verb=\tableofcontents=.
+
+\begin{framed}
+\begin{verbatim}
+\tableofcontents
+
+\section{Introduction}
+In this report we revisit the early research done by...
+
+\subsection{Layout of the report}
+More text here...
+
+\subsubsection{Points and Counterpoints}
+And more...
+
+\subsection{Goals}
+And more...
+\end{verbatim}
+\end{framed}
+
+You will need to run latex \textit{twice} for this to turn out.
+The first time latex records the titles of the sections and the second time they will be inserted into the table of contents.
 
 \section{References}
+\label{sec:references}
 
 LaTeX makes it easy to generate cross-references between sections.
 Most sectioning commands and figure commands can be labeled using a \verb=\label=
@@ -441,12 +527,12 @@ See section~\ref{sec:further-reading}.
 \end{framed}
 The tilde, \verb=~=, inserts a non-breaking space to keep the section number from being separated from the word ``section''.
 
-I usually use prefixes, like \texttt{sec:}, \texttt{eq:}, and \texttt{tbl:}, to remind me whether the label is referring to a section, subsection, table, figure,
-or equation.
+I usually use prefixes, like \texttt{sec:}, \texttt{eq:}, and \texttt{tbl:},
+to remind me whether the label is referring to a section, subsection, table, figure, or equation.
 But they are not required by latex.
 
 The \texttt{showlabels} package will display all your labels in the margin next to the item being tagged.
-It is very handy for writing your initial drafts.
+It is very handy when writing initial drafts.
 
 \section{Bibliography}
 
@@ -490,11 +576,89 @@ would like it to appear.
 
 When using citations, up to four passes may be needed to convert your file to a PDF.
 \begin{enumerate}
-    \item A first pass with LaTeX to generate an aux file listing the citations used.
+    \item A first pass with LaTeX to generate an \textit{aux} file listing the citations used.
     \item A second pass with BibTeX to generate the bibliography.
     \item A third pass with LaTeX to re-adjust the locations of the sections, tables, etc.
     \item A fourth pass with LaTeX to insert the correct cross-references and table of contents.
 \end{enumerate}
+
+\section{File Organization}
+
+LaTeX generates many auxiliary files when processing a document.
+For this reason, I usually put each document into its own folder.
+Then all the additional files are kept in the same place as the source files,
+and the extra files for different documents don't get mixed together.
+
+For documents larger than an article, such as a book or a dissertation, I have found it helpful to
+make a folder for the overall project, and then put each chapter into its own sub-folder.
+
+\begin{framed}
+\begin{verbatim}
+book-project/
+    references.bib
+    background
+        only.tex
+        background.tex
+    why-spheres
+        only.tex
+        spheres.tex
+    introduction.tex
+    preamble.tex
+    history-of-idea
+        only.tex
+        history.tex
+    book.tex
+\end{verbatim}
+\end{framed}
+
+In the above example directory layout, the file \textit{preamble.tex} contains any shared definitions which I intend to use across the chapters.
+(e.g. I defined the symbol \texttt{\\sss} in there which inserts three large stars so I can see places that I left incomplete.
+\verb=\newcommand{\sss}{\ensuremath{\star\star\star}}=)
+
+The main book is defined in the \textit{book.tex} file.
+It sets up the preamble, title, abstract, table of contents, and then includes each chapter with
+code similar to the following
+
+\begin{framed}
+\begin{verbatim}
+\chapter{Background and Prior Work}
+\label{ch:background}
+\input{background/background}
+\end{verbatim}
+\end{framed}
+
+Inside each chapter folder there are two tex files.
+One holds the main content of the chapter, e.g. \textit{background.tex}.
+This file does not include any preamble stuff nor the \verb=\documentclass= or \verb=\begin{document}= code.
+The other, \textit{only.tex}, wraps the content file so that the chapter can be processed by itself.
+The \textit{only.tex} file will look similar to the following.
+
+\begin{framed}
+\begin{verbatim}
+\documentclass[12pt]{amsart}
+\input{../preamble}
+\begin{document}
+\title{Background and prior work}
+\maketitle
+\input{background}
+\end{document}
+\end{verbatim}
+\end{framed}
+
+To only process a specific chapter, I run LaTeX on the file \textit{background/only.tex}.
+To create the entire book I run LaTeX on the file \textit{book.tex}.
+
+\section{Online Collaboration}
+
+There are websites that allow one to work on LaTeX documents collaboratively, much like Google Docs.
+They also keep your files on their servers, so you can access them from any computer.
+I think both offer free and paid plans.
+I haven't used either, and would welcome any feedback on which is better or on other services I haven't listed.
+
+\begin{itemize}
+\item ShareLaTeX, \url{https://www.sharelatex.com/}
+\item Overleaf, \url{https://www.overleaf.com/}
+\end{itemize}
 
 \section{Further Reading}
 \label{sec:further-reading}
@@ -507,7 +671,7 @@ When using citations, up to four passes may be needed to convert your file to a 
 
     \item Wikibooks LaTeX reference, \url{http://en.wikibooks.org/wiki/LaTeX/}
 
-        This is a great reference to keep handy when working on a latex document.
+        This is a \textbf{great reference} to keep handy when working on a latex document.
         It covers most common areas of LaTeX in great detail, and offers good extension packages to
         use for special formatting cases.
 
@@ -526,6 +690,7 @@ When using citations, up to four passes may be needed to convert your file to a 
     \item Leslie Lamport, ``LATEX: a document preparation system''
 
         The book by the originator of LaTeX on how to use the system.
+        Notre Dame has copies in the library, \url{http://onesearch.library.nd.edu/NDU:malc_blended:ndu_aleph001563762}
 
 \end{itemize}
 
@@ -536,6 +701,10 @@ In addition to the resources on the internet, Notre Dame has a mailing list for 
 I am on this list, as are a few people who are extremely knowledgeable on LaTeX.
 Most questions on the list are about the Notre Dame thesis style file, but any question is welcome.
 Please use the list as a resource if you run into problems.
+
+\section{Other document classes}
+Other layouts in addition to \textit{article} are \textit{report}, \textit{letter}, \textit{book}, and \textit{slides}.
+Fancier types are the AMS article classes \textit{amsart}, and the slide class \textit{beamer}.
 
 
 \bibliographystyle{plain}
