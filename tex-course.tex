@@ -6,6 +6,7 @@
 \usepackage{hyperref}
 \usepackage{graphicx}
 %\usepackage{showlabels}
+%\usepackage{charter}
 
 \titleformat{\section}[runin]
 {\normalfont\bfseries}
@@ -13,39 +14,70 @@
 \titlespacing{\section}
 {\parindent}{1.5ex plus .1ex minus .2ex}{10pt}
 
+\titleformat{\subsection}[runin]
+{\normalfont\scshape}
+{\S\thesubsection.}{.5em}{}[.]
+\titlespacing{\subsection}
+{\parindent}{1.5ex plus .1ex minus .2ex}{10pt}
+
 
 \begin{document}
 
-\title{\LaTeX\ Workshop}
+\title{Introduction to \LaTeX\ Workshop}
 \author{Don Brower\thanks{email: \texttt{dbrower$@$nd.edu}}}
-\date{2016-5-11}
+\date{2018-05-17}
 \maketitle
 
-\section{\TeX\ and \LaTeX}
+\section{What is \TeX?}
 
-\LaTeX\ is a typesetting system which makes it easy to create typographically sophisticated documents.
-It also has a challenging, unintuitive interface.
-A \LaTeX\ document starts as a file which has special markup characters (similar to HTML or Wiki Formatting),
-which is then processed by the \LaTeX\ program to produce a PDF document.
+\TeX\ is a system to produce formatted documents.
+While it can produce all kinds of documents, such as Articles, Slides, CVs, Handouts, and Exams,
+it is especially useful for items with mathematical formula (but that is not a requirement).
 
-Part of \LaTeX\ is the program \TeX, which came first in 1978.
-\TeX\ (which sounds like \textit{tech}, since the final \textit{X} is the greek letter chi) provides the foundational typesetting commands.
-\LaTeX\ is an add-on developed in 1986 to make using \TeX\ easier---so much so that \LaTeX\ 
-is now the standard everyone uses, although one may find references to old-style \TeX\ commands occasionally.
+\TeX\ is a mark-up language, akin to HTML.
+One starts by typing a text file, which contains commands telling \TeX\ how to format the file.
+Then one runs \TeX\ on it, and (hopefully) a beautiful PDF document is produced.
 
-This course tries to provide a hands-on guide to using \LaTeX.
+This course provides a hands-on guide to using \TeX\ (well, actually \LaTeX) for the first time.
 It assumes you have no experience with \LaTeX, but that you do have some computer experience.
-More comprehensive guides and manuals are presented at the end, in \S\ref{sec:further-reading}.
+The goal is for you to understand the basic \LaTeX\ concepts and terminology so that you can
+understand other resources online and in books.
+A small list of these resources is presented at the end, in \S\ref{sec:further-reading}.
 
-To show off the abilities of this new typesetting software, Donald Knuth, the creator of \TeX, made
-a fancy arrangement of the letters: \TeX.
-I find these annoying, so I will use TeX and LaTeX to refer to the two programs.
+To show off the abilities of this new typesetting software, Donald Knuth, the creator of \TeX,
+made a fancy arrangement of the letters: \TeX.
+I find this visually annoying, so I will use TeX and LaTeX to refer to the two programs.
+
+\section{History of TeX and LaTeX}
+
+The first version of the TeX system was created in 1978.
+It was written by a Donald Knuth, a computer scientist at Stanford University,
+to solve the problem of typesetting mathematical articles.
+In 1986 Leslie Lamport developed LaTeX as a way to make TeX easier to use.
+Nowadays, almost everyone uses LaTeX, and uses TeX and LaTeX to refer to the same
+thing.
+This course treats the two terms interchangeably.
 
 \section{Where is \TeX?}
 
 TeX is not a single program.
-It is a group of programs, and one usually installs it by installing a \textit{\TeX\ distribution}.
-The distribution to use depends on the operating system on your computer.
+It is a group of programs, and one traditionally installs them on a computer by way of a \textit{\TeX\ distribution}.
+However, there are also online services that will run TeX for you.
+There are advantages for both approaches, and one can even do both.
+Since the online services make it easy to collaborate with others, and don't require installing
+anything on one's computer, this workshop will use them.
+
+\subsection{Online Services}
+
+The University of Notre Dame has a site license to ShareLaTeX (\url{https://www.sharelatex.com/}).
+You can take advantage of this by creating an account using your ND email address.
+
+\subsection{TeX Distributions}
+To install TeX on your computer you first need to download a \textit{TeX Distribution}.
+(If the online service is good enough for you, feel free to skip to the next section).
+
+TeX distributions are large, and will take some time to download.
+The exact distribution to download depends on your computer's operating system.
 Some common distributions are in the following table.
 
 \begin{center}
@@ -60,21 +92,28 @@ Some common distributions are in the following table.
 \end{tabular}
 \end{center}
 
+Install the distribution according to the instructions with it.
+On Linux you may be able to use your package manager to do the installation (i.e. \texttt{apt} or {yum}).
+On MacOS, if you have Homebrew installed, you can install latex using it.\footnote{\texttt{brew cask install mactex}}
+
 In addition to a distribution, you will also need a \textit{text editor}.
 A text editor is a program which lets you type and edit text documents.
-The most important criteria is that the program can save plain text documents.
-Microsoft Word could work, but you need to specifically save yours files as ``Plain Text (.txt)''.
+The most important criteria is that the program can save \textit{plain text documents}.
+Microsoft Word could work, but you need to specifically save your files as ``Plain Text (.txt)''.
 Notepad is another text editor.
-TextEdit on Macs is almost a text editor, but one first needs to change the ``Format'' option in the preferences to ``Plain Text''.
+TextEdit on MacOS requires one to first change the ``Format'' option in the preferences to ``Plain Text''.
 
-Most distributions include speciality editors which are designed to work with LaTeX.
-Two such are \TeX shop and \TeX studio.
-This guide will assume you are using \TeX Works.
+Most distributions include speciality editors which are integrated with LaTeX.
+Two such are TeXshop and TeXstudio.
 
 
 \section{Hello World}
+For the rest of this course we will assume you are using ShareLaTeX.
 
-Type the following into your editor, save it as the file \textit{hello.tex} and then run LaTeX on the file.
+Start by making a new project: choose the button ``New Project'' and then choose ``Blank Project''.
+A new project is created and you should see a document with some text already in it.
+Delete all of the text and type the following.
+
 \begin{framed}
 \begin{verbatim}
 \documentclass{article}
@@ -85,21 +124,29 @@ Hello World!
 \end{verbatim}
 \end{framed}
 
-You should see a document with the phrase ``Hello World!'' on it.
-The backslash, `\textbackslash', tells LaTeX that the following word is a formatting command.
-The first one, \verb=\documentclass=, specifies which layout we want to use.
-Then the pair of \verb=\begin{document}= and \verb=\end{document}= wrap the words we want to be typeset.
-The text before the \verb=\begin{document}= is called the \emph{preamble}.
+Click the ``Recompile'' button and you should see a page with the words ``Hello World!'' appear to the right.
+
+The In this file, the backslash, \textbackslash, is used to tell LaTeX that the following word is a formatting command.
+The first backslashed word, \verb=\documentclass=, tells LaTeX style package to use, in this case an article.\footnote{Some other formatting packages are \textsf{book}, \textsf{beamer} (to make slide presentations), or \textsf{nddiss2e} to format ND dissertations.}
+
+The next commands are the pair \verb=\begin{document}= and \verb=\end{document}=.
+These commands enclose the text we wish to be typeset, and the pair always appear in a LaTeX file.
+The text between the \verb=\documentclass= and the \verb=\begin{document}= is called the \emph{preamble}.
+The preamble is used to load additional formatting packages we wish to use, or to define
+custom commands for use in our document.
 
 % makes a bunch of files: hello.log, hello.aux, hello.dvi, hello.blg, hello.bbl, hello.pdf, hello.synctex.gz
+
+Should you with to typeset an actual backslash character, you can use the command
+\verb=\textbackslash=.
 
 There are other special characters besides the backslash.
 They are
 \begin{center}
     \% \$ \{ \} \_ \# \& \textasciitilde\ \textgreater\ \textless\
 \end{center}
-These symbols all have special meanings in a LaTeX file.
-If you should need one of these symbols in your document, each character has a corresponding command to represent it:
+We will go over their meanings later.
+For now know that if you want to typeset one of them you will need to use a special command:
 \begin{center}
     \begin{tabular}[]{ll}
         \toprule
@@ -119,6 +166,8 @@ If you should need one of these symbols in your document, each character has a c
         \bottomrule
     \end{tabular}
 \end{center}
+
+For example to get ``That was \$100.89'', type \verb=That was \$100.89=.
 
 \section{Text Formatting}
 We can make text bold and italic.
@@ -140,9 +189,9 @@ They \textit{can be \textbf{nested}}.
 \end{framed}
 \end{center}
 
-These commands start with a backslash, followed by an opening brace, '\{', the text to format, and then a closing brace, '\}'.
+These commands start with a backslash, followed by an opening brace, \{, the text to format, and then a closing brace, \}.
 The opening and closing braces need to be matched.
-If there is more of one than the other, LaTeX will complain.
+If they are not matched, LaTeX will complain.
 
 Try using the following character styles:
 
@@ -171,62 +220,67 @@ Medium Weight   & \verb=\textmd{...}= \\
 
 Most of the time you will use normal spaces in your document.
 LaTeX will automatically format your lines, and group them into paragraphs.
-It will even hyphenate words to improve the line breaks!
+It will even hyphenate words to improve the line breaks.
 
 LaTeX will put lines which are next to each other into the same paragraph.
 To start a new paragraph, enter a blank line.
 
 \begin{framed}
-    \begin{verbatim}
-    This line will be in a paragraph.
-    And this line will
-    be in the same paragraph.
+\begin{verbatim}
+This line will be in a paragraph.
+And this line will
+be in the same paragraph.
 
-    This line is in a new paragraph.
+This line is in a new paragraph.
 
-    And this line is put
-    in a third paragraph. Along with
-    this line.
-    \end{verbatim}
+And this line is put
+in a third paragraph. Along with
+this line.
+\end{verbatim}
 \end{framed}
 
 Produces output like the following:
 
 \begin{framed}
-    This line will be in a paragraph.
-    And this line will
-    be in the same paragraph.
+This line will be in a paragraph.
+And this line will
+be in the same paragraph.
 
-    This line is in a new paragraph.
-    And this line is put
-    in the  second paragraph. Along with
-    this line.
+This line is in a new paragraph.
+
+And this line is put
+in a third paragraph. Along with
+this line.
 \end{framed}
 
-The paragraphs are adjusted to fully justify on the page.
-LaTeX will break lines in places that gives the best justification, and will even hyphenate words.
-Multiple spaces will be collapsed to a single space.
-Comments:
+By default, paragraphs are fully justified.
+LaTeX will break lines in places that gives the best justification, hyphenating words where needed.
+Multiple spaces are collapsed into a single space.
+Some comments:
 
 \begin{itemize}
-    \item Keep LaTeX from spliting a line at a given space by replacing the space with a tilde, '\textasciitilde'.
+    \item Keep LaTeX from spliting a line at a given space by replacing the space with a tilde, \textasciitilde.
         For example, \verb=Mrs.~White= will not insert a line break between \verb=Mrs.= and \verb=White=.\footnote{See \url{http://tex.stackexchange.com/questions/15547/when-should-i-use-non-breaking-space} for more discussion.}
 
-    \item You can force a line break by ending an input line with two backslashes, `\textbackslash\textbackslash'.
+    \item A line break can be forced by ending a line with two backslashes, \textbackslash\textbackslash
 
-    \item If LaTeX gets the hyphenation of a word wrong, tell LaTeX by using the \verb=\hyphenation{...}= command.
-        E.g. \verb=\hyphenation{wysiwyg Zoo-lander}= tells LaTeX to not hyphenate \textit{wysiwyg}, and that \textit{Zoolander} can be split after the \textit{Zoo}.
-        This command should only be needed, if at all, for technical vocabulary.
+    \item If LaTeX gets the hyphenation of a word wrong, you can tell LaTeX the correct hyphenation with the \verb=\hyphenation{...}= command.
+        E.g. \verb=\hyphenation{wysiwyg as-tro-labe}= tells LaTeX to not hyphenate \textit{wysiwyg}, and that \textit{astrolabe} can be split after the \textit{as} or before the \textit{labe}.
+        This command will be needed for technical vocabulary that the default rules get wrong.
+        (Confession: I have never needed this command.)
 
-    \item You can force a page break command using \verb=\pagebreak=
+    \item Force a page break with the command \verb=\pagebreak=
 
-    \item You can put in bigger spaces using the \verb=\hspace{...}= command. This line has \hspace{1in} \verb=\hspace{1in}= 1 inch of space.
+    \item Make horizontal spaces with the \verb=\hspace{...}= command. For example, this line has \hspace{1in} \verb=\hspace{1in}= 1 inch of space.
+
+    \item A common reason for horizontal space is to leave blank space for worksheets.
+        Sometimes a line is desired for those. In LaTeX that line is called a \textit{rule}: \verb=Name: \rule[-.5ex]{2in}{.1pt}=, Name: \rule[-.5ex]{2in}{.1pt}.
 \end{itemize}
 
 \section{Quotes and Comments}
 
 Don't use the usual quote character \verb="= in your files.
-Instead use two back-ticks \verb=``= and two apostrophes like so:
+Instead use two back-ticks \verb=``= as an open quote and two apostrophes as a close quote:
 \verb=``Quote''= to get the output ``Quote''.
 
 There are three kinds of dashes: the hyphen, - ; the en-dash, -- ; and the em-dash, ---.
@@ -313,7 +367,7 @@ The other kinds of lists are similar.
     \item Lists can even be nested.
         \begin{enumerate}
             \item This list appears inside an item for the outer list.
-            \item Another item, just to create a bullet point.
+            \item Another item, just to create a second point.
         \end{enumerate}
     \item The last enumerated sentence.
 \end{enumerate}
@@ -323,7 +377,7 @@ The other kinds of lists are similar.
     \item Lists can even be nested.
         \begin{enumerate}
             \item This list appears inside an item for the outer list.
-            \item Another item, just to create a bullet point.
+            \item Another item, just to create a second point.
         \end{enumerate}
     \item The last enumerated sentence.
 \end{enumerate}\end{verbatim}
@@ -356,43 +410,43 @@ The other kinds of lists are similar.
 
 \section{Math}
 
-The ability to typeset math formualae is the main reason many people
+The ability to typeset math formulae is the main reason many people
 choose to use LaTeX at first.
 A formula may be typeset \emph{inline}, such
-as $x$ is a real variable, and $f(z) = e^z$ is an analytic function.
+as $x$ and $f(z) = e^z$.
 More complex formula can be typeset in \emph{display style}:
 \[
     H(a, r) = \sum_{n = 0}^\infty ar^n = \frac{a}{1-r}.
 \]
 Inline formulae are surrounded by dollar signs, \$, and display formulae
-use \verb=\[= and \verb=\]=.
+use \verb=\[= and \verb=\]=:
 \begin{framed}
 \begin{verbatim}
 A formula may be typeset \emph{inline}, such
-as $x$ is a real variable, and $f(z) = e^z$ is an analytic function.
+as $x$ and $f(z) = e^z$.
 More complex formula can be typeset in \emph{display style}:
 \[
     H(a, r) = \sum_{n = 0}^\infty ar^n = \frac{a}{1-r}.
 \]\end{verbatim}
 \end{framed}
 
-Math formulae use carets, \^\ , for superscripts and underscores, \_\ , for subscripts.
-Other math notation use commands, such as \verb=\frac{..}{..}= for fractions, and
+The text between the dollar signs or the \verb=\[= and \verb=\]= is said to
+be in \textit{math mode}.
+In math mode, text is treated differently than in the usual paragraph mode.
+Spaces in math mode are not typeset.
+In math mode, one can use carets, \^\ , and underscores, \_\ , for superscripts and subscripts, respectively.
+Other commands are only available in math mode, for example \verb=\frac{..}{..}= to make fractions, and
 \verb=\sum= for the summation symbol.
 You can get Greek letters using \verb=$\alpha, \beta, \gamma, \ldots$=, to give $\alpha, \beta, \gamma,\ldots$
 
 There are, unfortunately, too many math commands to discuss each here.
 If you have especially demanding math needs, the \verb=amsmath= package has many specialized environments for mathematics.
 
-LaTeX makes a distinction between commands entered in \emph{math mode}, as opposed to \emph{text mode}.
-Some commands only work in one or the other.
-For example, the \verb=\frac= command only works in math mode.
-
 \section{Pictures and Packages}
 
 To include a picture, we need to use the \verb=graphicx= package.
-In the preamble---right after the \verb=\documentclass{..}=, 
-put \verb=\usepackage{graphicx}=.
+In the preamble right after the \verb=\documentclass{..}=,
+type \verb=\usepackage{graphicx}=.
 
 Then to include a picture---in EPS, PDF, PNG, or JPG formats---use the command
 \verb=\includegraphics{...}=.
@@ -404,20 +458,20 @@ For example,
 %
 \begin{framed}\begin{verbatim}
 \begin{center}
-    \includegraphics[scale=.5]{hello-yes-this-is-dog}
+    \includegraphics[scale=.5]{doggie}
 \end{center}\end{verbatim}
 \end{framed}
-will center the picture \emph{hello-yes-this-is-dog} in its own text block.
-The \texttt{scale} option can be used to fine-tune the size of the image.
+will center the picture \emph{doggie} in its own text block.
+The \texttt{scale} option can be used to adjust the size of the image on the page.
 
 \section{Tables}
 
 There are two main table commands:
 \begin{itemize}
-\item There is the \verb=tabular= command to arrange figures into rows and columns.
-\item There is the \verb=table= command to produce a floating figure at a convenient piece of the page, say the bottom or the top.
+\item The \verb=tabular= command to arrange figures into rows and columns.
+\item The \verb=table= command to produce a floating figure at a convenient piece of the page, say the bottom or the top.
 \end{itemize}
-Usually the two are used together, with a \verb=\table= command and a \verb=\tabular= inside of it.
+Usually the two are used together, with a \verb=\tabular= command nested inside a \verb=\table= wrapper.
 
 The \verb=tabular= environment takes a list of characters giving the justification for each column in the table.
 After that, each row of the table is listed. Each row ends with a double backslash (\verb=\\=).
