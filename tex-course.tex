@@ -25,7 +25,7 @@
 
 \title{Introduction to \LaTeX\ Workshop}
 \author{Don Brower\thanks{email: \texttt{dbrower$@$nd.edu}}}
-\date{2018-05-17}
+\date{2019-05-15}
 \maketitle
 
 \section{What is \TeX?}
@@ -35,13 +35,13 @@ While it can produce all kinds of documents, such as Articles, Slides, CVs, Hand
 it is especially useful for items with mathematical formula (but that is not a requirement).
 
 \TeX\ is a mark-up language, akin to HTML.
-One starts by typing a text file, which contains commands telling \TeX\ how to format the file.
+One writes a text file containing commands that tell \TeX\ how to format the file.
 Then one runs \TeX\ on it, and (hopefully) a beautiful PDF document is produced.
 
-This course provides a hands-on guide to using \TeX\ (well, actually \LaTeX) for the first time.
-It assumes you have no experience with \LaTeX, but that you do have some computer experience.
-The goal is for you to understand the basic \LaTeX\ concepts and terminology so that you can
-understand other resources online and in books.
+Specifically, this workshop is on \LaTeX, which is an extension to \TeX\ that makes it easier to use.
+The workshop assumes you have no experience with \LaTeX, but that you do have some computer experience.
+The goal is for you to be able to understand the basic \LaTeX\ concepts and terminology so that you can
+find and understand other resources and guides for \LaTeX, both online and in books.
 A small list of these resources is presented at the end, in \S\ref{sec:further-reading}.
 
 To show off the abilities of this new typesetting software, Donald Knuth, the creator of \TeX,
@@ -56,96 +56,58 @@ to solve the problem of typesetting mathematical articles.
 In 1986 Leslie Lamport developed LaTeX as a way to make TeX easier to use.
 Nowadays, almost everyone uses LaTeX, and uses TeX and LaTeX to refer to the same
 thing.
-This course treats the two terms interchangeably.
+This course will treat the two terms interchangeably.
 
 \section{Where is \TeX?}
 
-TeX is not a single program.
-It is a group of programs, and one traditionally installs them on a computer by way of a \textit{\TeX\ distribution}.
-However, there are also online services that will run TeX for you.
-There are advantages for both approaches, and one can even do both.
-Since the online services make it easy to collaborate with others, and don't require installing
-anything on one's computer, this workshop will use them.
+This workshop will use an online version of \LaTeX\ at \url{overleaf.com}.
+Notre Dame has a site licence, and if you register using your Notre Dame email address, it will be free.
 
-\subsection{Online Services}
-
-The University of Notre Dame has a site license to ShareLaTeX (\url{https://www.sharelatex.com/}).
-You can take advantage of this by creating an account using your ND email address.
-
-\subsection{TeX Distributions}
-To install TeX on your computer you first need to download a \textit{TeX Distribution}.
-(If the online service is good enough for you, feel free to skip to the next section).
-
-TeX distributions are large, and will take some time to download.
-The exact distribution to download depends on your computer's operating system.
-Some common distributions are in the following table.
-
-\begin{center}
-\begin{tabular}{ll}
-    \toprule
-    Operating System & Distribution \\
-    \midrule
-    Windows & MiKTeX \\
-    Mac & MacTeX \\
-    Linux & TeX Live \\
-    \bottomrule
-\end{tabular}
-\end{center}
-
-Install the distribution according to the instructions with it.
-On Linux you may be able to use your package manager to do the installation (i.e. \texttt{apt} or {yum}).
-On MacOS, if you have Homebrew installed, you can install latex using it.\footnote{\texttt{brew cask install mactex}}
-
-In addition to a distribution, you will also need a \textit{text editor}.
-A text editor is a program which lets you type and edit text documents.
-The most important criteria is that the program can save \textit{plain text documents}.
-Microsoft Word could work, but you need to specifically save your files as ``Plain Text (.txt)''.
-Notepad is another text editor.
-TextEdit on MacOS requires one to first change the ``Format'' option in the preferences to ``Plain Text''.
-
-Most distributions include speciality editors which are integrated with LaTeX.
-Two such are TeXshop and TeXstudio.
+Using an online service is nice since you will not need to install TeX on your computer (which is possible).
+An online service also makes it easier to collaborate on writing documents, which may be helpful in the future.
 
 
 \section{Hello World}
-For the rest of this course we will assume you are using ShareLaTeX.
-
-Start by making a new project: choose the button ``New Project'' and then choose ``Blank Project''.
-A new project is created and you should see a document with some text already in it.
-Delete all of the text and type the following.
+Start by making a new project: choose the button \textsf{New Project} and then choose \textsf{Blank Project}.
+Type in a name for this project, say ``Latex workshop''.
+A new project is created and you should see a document with the following text in it:
 
 \begin{framed}
 \begin{verbatim}
 \documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{workshop}
+\author{Don Brower}
+\date{May 2019}
 
 \begin{document}
-Hello World!
+
+\maketitle
+
+\section{Introduction}
+
 \end{document}
 \end{verbatim}
 \end{framed}
 
-Click the ``Recompile'' button and you should see a page with the words ``Hello World!'' appear to the right.
+Click the ``Recompile'' button and you should see a page with the your name, today's date, and the word ``Introduction''.
 
-The In this file, the backslash, \textbackslash, is used to tell LaTeX that the following word is a formatting command.
+Now type ``hello world'' on the line after the word ``Introduction'', and recompile. You should see your changes appear in the PDF on the right-hand side.
+
+This is a LaTeX file. The commands that start with a backslash, \textbackslash, tell LaTeX that the following word is a formatting command.
 The first backslashed word, \verb=\documentclass=, tells LaTeX style package to use, in this case an article.\footnote{Some other formatting packages are \textsf{book}, \textsf{beamer} (to make slide presentations), or \textsf{nddiss2e} to format ND dissertations.}
 
-The next commands are the pair \verb=\begin{document}= and \verb=\end{document}=.
-These commands enclose the text we wish to be typeset, and the pair always appear in a LaTeX file.
-The text between the \verb=\documentclass= and the \verb=\begin{document}= is called the \emph{preamble}.
-The preamble is used to load additional formatting packages we wish to use, or to define
-custom commands for use in our document.
+The pair of commands \verb=\begin{document}= and \verb=\end{document}= enclose the actual text to be typeset.
+The text in between \verb=\documentclass= and \verb=\begin{document}= is called the \emph{preamble}.
+The preamble is used to load additional packages we wish to use, or to define custom commands for use in our document.
 
 % makes a bunch of files: hello.log, hello.aux, hello.dvi, hello.blg, hello.bbl, hello.pdf, hello.synctex.gz
 
-Should you with to typeset an actual backslash character, you can use the command
-\verb=\textbackslash=.
-
-There are other special characters besides the backslash.
-They are
+In addition to the backslash, there are other special characters to be aware of:
 \begin{center}
     \% \$ \{ \} \_ \# \& \textasciitilde\ \textgreater\ \textless\
 \end{center}
-We will go over their meanings later.
 For now know that if you want to typeset one of them you will need to use a special command:
 \begin{center}
     \begin{tabular}[]{ll}
@@ -169,9 +131,9 @@ For now know that if you want to typeset one of them you will need to use a spec
 
 For example to get ``That was \$100.89'', type \verb=That was \$100.89=.
 
+
 \section{Text Formatting}
-We can make text bold and italic.
-Enter this between the begin and end pair from before.
+We can make text bold and italic with the \verb=\textbf{}= and \verb=\textit{}= commands.
 
 \begin{framed}
 \begin{verbatim}
@@ -264,17 +226,17 @@ Some comments:
 
     \item A line break can be forced by ending a line with two backslashes, \textbackslash\textbackslash
 
-    \item If LaTeX gets the hyphenation of a word wrong, you can tell LaTeX the correct hyphenation with the \verb=\hyphenation{...}= command.
+    \item If LaTeX gets the hyphenation of a word wrong, you can tell LaTeX the correct hyphenation with \verb=\hyphenation{...}=.
         E.g. \verb=\hyphenation{wysiwyg as-tro-labe}= tells LaTeX to not hyphenate \textit{wysiwyg}, and that \textit{astrolabe} can be split after the \textit{as} or before the \textit{labe}.
         This command will be needed for technical vocabulary that the default rules get wrong.
-        (Confession: I have never needed this command.)
+        (Confession: I have never needed to use this command.)
 
-    \item Force a page break with the command \verb=\pagebreak=
+    \item Force a page break with \verb=\pagebreak=
 
     \item Make horizontal spaces with the \verb=\hspace{...}= command. For example, this line has \hspace{1in} \verb=\hspace{1in}= 1 inch of space.
 
     \item A common reason for horizontal space is to leave blank space for worksheets.
-        Sometimes a line is desired for those. In LaTeX that line is called a \textit{rule}: \verb=Name: \rule[-.5ex]{2in}{.1pt}=, Name: \rule[-.5ex]{2in}{.1pt}.
+        Sometimes a line is desired for those. In LaTeX that line is called a \textit{rule}. E.g. \verb=Name: \rule[-.5ex]{2in}{.1pt}=, Name: \rule[-.5ex]{2in}{.1pt}.
 \end{itemize}
 
 \section{Quotes and Comments}
@@ -408,6 +370,70 @@ The other kinds of lists are similar.
 \end{description}\end{verbatim}
 \end{framed}
 
+\section{Sections and Table of Contents}
+
+Sections are started by using the \verb=\section{}= command.
+The text in the braces is the section title.
+Everything following a section command (until the next section command) is considered part of that section.
+There are also commands for \verb=\subsection= and \verb=\subsubsection=.
+
+The exact sectioning commands available depends on the \verb=\documentclass= your document is using.
+For example, the book type includes \verb=\chapter= commands.
+
+A table of contents is inserted using the command \verb=\tableofcontents=.
+
+\begin{framed}
+\begin{verbatim}
+\tableofcontents
+
+\section{Introduction}
+In this report we revisit the early research done by...
+
+\subsection{Layout of the report}
+More text here...
+
+\subsubsection{Points and Counterpoints}
+And more...
+
+\subsection{Goals}
+And more...
+\end{verbatim}
+\end{framed}
+
+You will need to run latex \textit{twice} for this to turn out.
+The first time latex records the titles of the sections and the second time they will be inserted into the table of contents.
+
+\section{References}
+\label{sec:references}
+
+LaTeX makes it easy to generate cross-references between sections.
+Most sectioning commands and figure commands can be labeled using a \verb=\label=
+directive, which assigns the command an internal name.
+To refer to the section/figure/table one then uses a \verb=\ref= command with the same internal name.
+For example, the following code will tag the section ``Further Reading'' with the label
+\verb=sec:further-reading=.
+\begin{framed}\begin{verbatim}
+\section{Further Reading}
+\label{sec:further-reading}
+\end{verbatim}
+\end{framed}
+To refrer to the section we then use the \verb=\ref= command as follows:
+\begin{framed}\begin{verbatim}
+See section~\ref{sec:further-reading}.
+\end{verbatim}
+\end{framed}
+The tilde, \verb=~=, inserts a non-breaking space to keep the section number from being separated from the word ``section''.
+
+I usually use prefixes, like \texttt{sec:}, \texttt{eq:}, and \texttt{tbl:},
+to remind me whether the label is referring to a section, subsection, table, figure, or equation.
+But they are not required by latex.
+
+The \texttt{showlabels} package will display all your labels in the margin next to the item being tagged.
+It is very handy when writing initial drafts.
+Add the line \verb=\usepackage{showlabels}= to the preamble to use it.
+
+
+
 \section{Math}
 
 The ability to typeset math formulae is the main reason many people
@@ -527,67 +553,6 @@ The \verb=tabular= environment is as before.
 A caption is added using \verb=\caption= and the \verb=\label= gives an internal name to this table
 for cross-reference purposes (see \S\ref{sec:references}).
 
-\section{Sections and Table of Contents}
-
-Sections are started by using the \verb=\section{}= command.
-The text in the braces is the section title.
-Everything following a section command (until the next section command) is considered part of that section.
-There are also commands for \verb=\subsection= and \verb=\subsubsection=.
-
-The exact sectioning commands available depends on the \verb=\documentclass= your document is using.
-For example, the book type includes \verb=\chapter= commands.
-
-A table of contents is inserted using the command \verb=\tableofcontents=.
-
-\begin{framed}
-\begin{verbatim}
-\tableofcontents
-
-\section{Introduction}
-In this report we revisit the early research done by...
-
-\subsection{Layout of the report}
-More text here...
-
-\subsubsection{Points and Counterpoints}
-And more...
-
-\subsection{Goals}
-And more...
-\end{verbatim}
-\end{framed}
-
-You will need to run latex \textit{twice} for this to turn out.
-The first time latex records the titles of the sections and the second time they will be inserted into the table of contents.
-
-\section{References}
-\label{sec:references}
-
-LaTeX makes it easy to generate cross-references between sections.
-Most sectioning commands and figure commands can be labeled using a \verb=\label=
-directive, which assigns the command an internal name.
-To refer to the section/figure/table one then uses a \verb=\ref= command with the same internal name.
-For example, the following code will tag the section ``Further Reading'' with the label
-\verb=sec:further-reading=.
-\begin{framed}\begin{verbatim}
-\section{Further Reading}
-\label{sec:further-reading}
-\end{verbatim}
-\end{framed}
-To refrer to the section we then use the \verb=\ref= command as follows:
-\begin{framed}\begin{verbatim}
-See section~\ref{sec:further-reading}.
-\end{verbatim}
-\end{framed}
-The tilde, \verb=~=, inserts a non-breaking space to keep the section number from being separated from the word ``section''.
-
-I usually use prefixes, like \texttt{sec:}, \texttt{eq:}, and \texttt{tbl:},
-to remind me whether the label is referring to a section, subsection, table, figure, or equation.
-But they are not required by latex.
-
-The \texttt{showlabels} package will display all your labels in the margin next to the item being tagged.
-It is very handy when writing initial drafts.
-
 \section{Bibliography}
 
 The BibTeX program will generate bibliographies for LaTeX documents.
@@ -636,83 +601,71 @@ When using citations, up to four passes may be needed to convert your file to a 
     \item A fourth pass with LaTeX to insert the correct cross-references and table of contents.
 \end{enumerate}
 
-\section{File Organization}
-
-LaTeX generates many auxiliary files when processing a document.
-For this reason, I usually put each document into its own folder.
-Then all the additional files are kept in the same place as the source files,
-and the extra files for different documents don't get mixed together.
-
-For documents larger than an article, such as a book or a dissertation, I have found it helpful to
-make a folder for the overall project, and then put each chapter into its own sub-folder.
-
-\begin{framed}
-\begin{verbatim}
-book-project/
-    references.bib
-    background
-        only.tex
-        background.tex
-    why-spheres
-        only.tex
-        spheres.tex
-    introduction.tex
-    preamble.tex
-    history-of-idea
-        only.tex
-        history.tex
-    book.tex
-\end{verbatim}
-\end{framed}
-
-In the above example directory layout, the file \textit{preamble.tex} contains any shared definitions which I intend to use across the chapters.
-(e.g. I defined the symbol \texttt{\\sss} in there which inserts three large stars so I can see places that I left incomplete.
-\verb=\newcommand{\sss}{\ensuremath{\star\star\star}}=)
-
-The main book is defined in the \textit{book.tex} file.
-It sets up the preamble, title, abstract, table of contents, and then includes each chapter with
-code similar to the following
-
-\begin{framed}
-\begin{verbatim}
-\chapter{Background and Prior Work}
-\label{ch:background}
-\input{background/background}
-\end{verbatim}
-\end{framed}
-
-Inside each chapter folder there are two tex files.
-One holds the main content of the chapter, e.g. \textit{background.tex}.
-This file does not include any preamble stuff nor the \verb=\documentclass= or \verb=\begin{document}= code.
-The other, \textit{only.tex}, wraps the content file so that the chapter can be processed by itself.
-The \textit{only.tex} file will look similar to the following.
-
-\begin{framed}
-\begin{verbatim}
-\documentclass[12pt]{amsart}
-\input{../preamble}
-\begin{document}
-\title{Background and prior work}
-\maketitle
-\input{background}
-\end{document}
-\end{verbatim}
-\end{framed}
-
-To only process a specific chapter, I run LaTeX on the file \textit{background/only.tex}.
-To create the entire book I run LaTeX on the file \textit{book.tex}.
-
-\section{Online Collaboration}
-
-There are websites that allow one to work on LaTeX documents collaboratively, much like Google Docs.
-They also keep your files on their servers, so you can access them from any computer.
-I think both offer free and paid plans.
-I haven't used either, and would welcome any feedback on which is better or on other services I haven't listed.
-
-\begin{itemize}
-\item ShareLaTeX, \url{https://www.sharelatex.com/}
-\item Overleaf, \url{https://www.overleaf.com/}
-\end{itemize}
+%\section{File Organization}
+%
+%LaTeX generates many auxiliary files when processing a document.
+%For this reason, I usually put each document into its own folder.
+%Then all the additional files are kept in the same place as the source files,
+%and the extra files for different documents don't get mixed together.
+%
+%For documents larger than an article, such as a book or a dissertation, I have found it helpful to
+%make a folder for the overall project, and then put each chapter into its own sub-folder.
+%
+%\begin{framed}
+%\begin{verbatim}
+%book-project/
+%    references.bib
+%    background
+%        only.tex
+%        background.tex
+%    why-spheres
+%        only.tex
+%        spheres.tex
+%    introduction.tex
+%    preamble.tex
+%    history-of-idea
+%        only.tex
+%        history.tex
+%    book.tex
+%\end{verbatim}
+%\end{framed}
+%
+%In the above example directory layout, the file \textit{preamble.tex} contains any shared definitions which I intend to use across the chapters.
+%(e.g. I defined the symbol \texttt{\\sss} in there which inserts three large stars so I can see places that I left incomplete.
+%\verb=\newcommand{\sss}{\ensuremath{\star\star\star}}=)
+%
+%The main book is defined in the \textit{book.tex} file.
+%It sets up the preamble, title, abstract, table of contents, and then includes each chapter with
+%code similar to the following
+%
+%\begin{framed}
+%\begin{verbatim}
+%\chapter{Background and Prior Work}
+%\label{ch:background}
+%\input{background/background}
+%\end{verbatim}
+%\end{framed}
+%
+%Inside each chapter folder there are two tex files.
+%One holds the main content of the chapter, e.g. \textit{background.tex}.
+%This file does not include any preamble stuff nor the \verb=\documentclass= or \verb=\begin{document}= code.
+%The other, \textit{only.tex}, wraps the content file so that the chapter can be processed by itself.
+%The \textit{only.tex} file will look similar to the following.
+%
+%\begin{framed}
+%\begin{verbatim}
+%\documentclass[12pt]{amsart}
+%\input{../preamble}
+%\begin{document}
+%\title{Background and prior work}
+%\maketitle
+%\input{background}
+%\end{document}
+%\end{verbatim}
+%\end{framed}
+%
+%To only process a specific chapter, I run LaTeX on the file \textit{background/only.tex}.
+%To create the entire book I run LaTeX on the file \textit{book.tex}.
 
 \section{Further Reading}
 \label{sec:further-reading}
