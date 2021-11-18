@@ -24,8 +24,8 @@
 \begin{document}
 
 \title{Introduction to \LaTeX\ Workshop}
-\author{Don Brower\thanks{email: \texttt{dbrower$@$nd.edu}}}
-\date{2019-05-15}
+\author{Don Brower\thanks{email: \texttt{dbrower$@$nd.edu}} \\ Navari Family Center for Digital Scholarship}
+\date{2021-11-18}
 \maketitle
 
 \section{What is \TeX?}
@@ -64,7 +64,7 @@ This workshop will use an online version of \LaTeX\ at \url{overleaf.com}.
 Notre Dame has a site licence, and if you register using your Notre Dame email address, it will be free.
 
 Using an online service is nice since you will not need to install TeX on your computer (which is possible).
-An online service also makes it easier to collaborate on writing documents, which may be helpful in the future.
+An online service also makes it easier to collaborate on writing documents with others.
 
 
 \section{Hello World}
@@ -222,7 +222,7 @@ Some comments:
 
 \begin{itemize}
     \item Keep LaTeX from spliting a line at a given space by replacing the space with a tilde, \textasciitilde.
-        For example, \verb=Mrs.~White= will not insert a line break between \verb=Mrs.= and \verb=White=.\footnote{See \url{http://tex.stackexchange.com/questions/15547/when-should-i-use-non-breaking-space} for more discussion.}
+        For example, \verb=Mrs.~White= will not insert a line break between \verb=Mrs.= and \verb=White=.\footnote{See \url{https://tex.stackexchange.com/questions/15547/when-should-i-use-non-breaking-space} for more discussion.}
 
     \item A line break can be forced by ending a line with two backslashes, \textbackslash\textbackslash
 
@@ -671,43 +671,35 @@ When using citations, up to four passes may be needed to convert your file to a 
 \label{sec:further-reading}
 
 \begin{itemize}
-    \item Andrew Roberts, ``Getting to Grips with LaTeX'', \url{http://www.andy-roberts.net/writing/latex}.
+    \item Andrew Roberts, ``Getting to Grips with LaTeX'', \url{https://www.andy-roberts.net/writing/latex}.
 
         This is a nice introduction to latex tutorial, similar to this document, but I feel it does a better job of
         surveying all the basic formatting commands.
 
-    \item Wikibooks LaTeX reference, \url{http://en.wikibooks.org/wiki/LaTeX/}
+    \item Wikibooks LaTeX reference, \url{https://en.wikibooks.org/wiki/LaTeX/}
 
         This is a \textbf{great reference} to keep handy when working on a latex document.
         It covers most common areas of LaTeX in great detail, and offers good extension packages to
         use for special formatting cases.
 
-    \item J\"urgen Fenn, ``Managing Citations and Your Bibliography with BibTeX'', \url{http://www.tug.org/pracjourn/2006-4/fenn/fenn.pdf}
+    \item J\"urgen Fenn, ``Managing Citations and Your Bibliography with BibTeX'', \url{https://www.tug.org/pracjourn/2006-4/fenn/fenn.pdf}
 
         J\"urgen Fenn article answers many basic questions about using BibTeX and pointers to handling special situations, such as proper names in a title.
         It only shows its age when it discusses the future of BibTeX (section 5.6), where it turns out that BibTeX standard has been accepted by
         libraries and other archives as an export format for citations (but not the ND Library).
         In part the ubiquity of BibTeX is due to the stability of its citation data format.
 
-    \item Michael Downes, ``Short Math Guide for \LaTeX'', \url{ftp://ftp.ams.org/ams/doc/amsmath/short-math-guide.pdf}
+    \item Michael Downes and Barbara Beeton, ``Short Math Guide for \LaTeX'', \url{http://tug.ctan.org/info/short-math-guide/short-math-guide.pdf}
 
-        This short (17 page) paper lists the extra math commands, symbols, and fonts provided by the American Mathematical Society LaTeX packages
+        This short (21 page) paper lists the extra math commands, symbols, and fonts provided by the American Mathematical Society LaTeX packages
         (\textit{amssymb} and \textit{amsmath}).
 
     \item Leslie Lamport, ``LATEX: a document preparation system''
 
         The book by the originator of LaTeX on how to use the system.
-        Notre Dame has copies in the library, \url{http://onesearch.library.nd.edu/NDU:malc_blended:ndu_aleph001563762}
+        Notre Dame has copies in the library, \url{https://onesearch.library.nd.edu/NDU:malc_blended:ndu_aleph001563762}
 
 \end{itemize}
-
-\section{LaTeX at Notre Dame}
-
-In addition to the resources on the internet, Notre Dame has a mailing list for tex help,
-\verb=nd-latex-users@listserv.nd.edu=.
-I am on this list, as are a few people who are extremely knowledgeable on LaTeX.
-Most questions on the list are about the Notre Dame thesis style file, but any question is welcome.
-Please use the list as a resource if you run into problems.
 
 \section{Other document classes}
 Other layouts in addition to \textit{article} are \textit{report}, \textit{letter}, \textit{book}, and \textit{slides}.
